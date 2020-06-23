@@ -1,5 +1,7 @@
 # Tattoo-GAN
 
+TBC Soon! 6/22/2020
+
 <p align="center">
   <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/Tattoo-GAN.gif?raw=true" alt="Tattoo-GAN"/>
 </p>
