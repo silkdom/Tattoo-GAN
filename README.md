@@ -51,7 +51,7 @@ def white(img):
   return(nwhite / float(n))
 ```
 
-Using this function the vast majority of real (on body) tattoos and irrelavent images are deleted. The remainder of the notebook compiles a list of sorted profiles with atleast 1 image meeting the requirements. Of the ~100k images downloaded, 1479 profiles were satisfactory. 
+Using this function the vast majority of real (on body) tattoos and irrelavent images are deleted. The remainder of the notebook compiles a list of sorted profiles with atleast 1 image meeting the requirements. Of the ~100k imageset, 1479 unique profiles were satisfactory. 
 
 #### Image Scraping
 [Notebook](https://github.com/silkdom/Tattoo-GAN/blob/master/Image_Scraper.ipynb)
