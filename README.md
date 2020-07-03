@@ -1,11 +1,13 @@
 # Tattoo-GAN
 ## Overview
 
+Using GANs to generate tattoo design ideas. This project uses custom built notebooks to compile a imageset of tattoo flash illustration done by tattoo artists. From this imageset, generative adversarial network architectures (DCGAN & StyleGAN2) are applied to generate unique tattoo designs. 
+
+
 <p align="center">
   <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/Tattoo-GAN.gif?raw=true" alt="Tattoo-GAN"/>
 </p>
 
-Using GANs to create tattoo ideas
 
 ## How it Works
 
@@ -16,10 +18,10 @@ The workflow for the generation of tattoo design ideas can be broken into 4 sect
 - Model training
 - Model testing
 
-#### Profile Scraping
+### Profile Scraping
 [Notebook](https://github.com/silkdom/Tattoo-GAN/blob/master/Profile_Scraper.ipynb)
 
-This section's objective is to compile a list of Instagram profiles that are likely to contain pictures of flash tattoo's. This logic behind constructing the workflow this way is because of the relitively low, variable, and unpublished request limit Instagram has on their servers. To bypass this, the first block of code first downloads all pictures in tagged #tattooflash over a certain time period. This is achieved using the Instaloader package with the metadata (date, likes, profile username) output as the the filename. 
+This section's objective is to compile a list of Instagram profiles of suspected tattoo artists (profiles likely to contain pictures of flash tattoo's). This logic behind constructing the workflow this way is because of the relitively low, variable, and unpublished request limit Instagram has on their servers. To bypass this, the idea is to maximize download efficiency (the chances that a image downloaded meets the requirements). Intuitively tattoo artists profiles maximize this efficiency. The first block of code first downloads all pictures in tagged #tattooflash over a certain time period. This is achieved using the Instaloader package with the metadata (date, likes, profile username) output as the the filename. 
 
 ```python
 L = instaloader.Instaloader(save_metadata=False,download_comments=False,download_geotags=False,download_videos=False, filename_pattern="{date_utc}_UTC_likes_{likes}_profile_{profile}", post_metadata_txt_pattern="")
@@ -51,7 +53,7 @@ def white(img):
 
 Using this function the vast majority of real (on body) tattoos and irrelavent images are deleted. The remainder of the notebook compiles a list of sorted profiles with atleast 1 image meeting the requirements. Of the ~100k imageset, 1479 unique profiles were satisfactory. 
 
-#### Image Scraping
+### Image Scraping
 [Notebook](https://github.com/silkdom/Tattoo-GAN/blob/master/Image_Scraper.ipynb)
 
 Now a list of potential tattoo artsists is generated, Instaloader can then be used to download the contents of each profile. 
@@ -72,7 +74,7 @@ for i in profiles:
 
 Where the function move() mimics the profile scraper notebook and saves images in a profile that meet the requirements and deletes the rest. Sporadic unavoidable errors and rate limits were met so this script was run on three separate notebooks (to maximize uptime) for ~5 days, yielding ~50k satisfactory images. 
 
-#### Model training
+### Model training
 
 First pass used the raw generated dataset with PyTorch's DCGAN implementation: [Repo](https://github.com/pytorch/examples/tree/master/dcgan). However, this is an older network architecture and provided less than adequate results. 
 
@@ -117,7 +119,7 @@ Thankfully the tormented faces fully dissapeared by the 60th iteration. The mode
 
 It can be seen that there are a few similarities in the generated images, which can be unfortunately attributed to partial modal collapse. This has to be expected with such a diverse imageset, thus I am happy with the results! 
 
-#### Model Testing
+### Model Testing
 
 The training process only produces 28 images per iteration (for progress tracking), and thus is not suitable for tattoo design generation. Instead a testing process using the now trained model can be performed. Thankfully the 'heavy-lifting' is not over and less compute is required. Infact for testing, Colab is more than adequate. Colab notebook soon to come. 
 
@@ -125,7 +127,7 @@ The training process only produces 28 images per iteration (for progress trackin
 !python run_generator.py generate-images --network=/content/network-snapshot-010409.pkl --seeds=1-1000 --truncation-psi=1.0
 ```
 
-This command generates 1000 1024x1024 images, which can then be examined for tattoo inspiration. The following is my favourite;
+This command generates 1000 1024x1024 images, which can then be examined for tattoo inspiration. The following is my favourite, and will hopefully become permanent in the near future!
 
 <p align="center">
   <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/seed0179_2.png?raw=true" height="700" alt="Fav"/>
