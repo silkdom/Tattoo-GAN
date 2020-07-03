@@ -76,7 +76,13 @@ Where the function move() mimics the profile scraper notebook and saves images i
 
 #### Tattoo design generation
 
-First pass used the raw generated dataset with the 
+First pass used the raw generated dataset with PyTorch's DCGAN implementation: [Repo](https://github.com/pytorch/examples/tree/master/dcgan). However, this is an older network architecture and provided less than adequate results. 
+
+<p align="center">
+  <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/dcgan.png?raw=true" width="500" alt="dcgan"/>
+</p>
+
+
 
 ```.bash
 python dataset-tools.py --input_folder ~/stylegan2/raw_datasets/agg --output_folder ./output/agg/ --process_type square --border_type solid --border_color 255,255,255
