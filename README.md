@@ -1,7 +1,7 @@
 # Tattoo-GAN
 ## Overview
 
-Using GANs to generate tattoo design ideas. This project uses custom built notebooks to compile a imageset of tattoo flash illustration done by probable tattoo artists. From this imageset, generative adversarial network models (DCGAN & StyleGAN2) are trained and then tested to generate unique tattoo designs. Finally, a Colab notebook is built for accesible generation of ideas!
+Using GANs to generate tattoo design ideas. This project uses custom built notebooks to compile a imageset of tattoo flash illustration done by probable tattoo artists. From this imageset, generative adversarial network models (DCGAN & StyleGAN2) are trained and then tested to generate unique tattoo designs. Finally, a Colab notebook is built for accesible generation of tattoo design ideas!
 
 <p align="center">
   <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/Tattoo-GAN.gif?raw=true" alt="Tattoo-GAN"/>
