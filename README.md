@@ -12,11 +12,12 @@ Using GANs to create tattoo ideas
 
 ## How it Works
 
-The workflow for the generation of tattoo design ideas can be broken into 3 sections;
+The workflow for the generation of tattoo design ideas can be broken into 4 sections;
 
 - Profile scraping
 - Image scraping
-- Tattoo design generation
+- Model training
+- Model testing
 
 #### Profile Scraping
 [Notebook](https://github.com/silkdom/Tattoo-GAN/blob/master/Profile_Scraper.ipynb)
@@ -74,7 +75,7 @@ for i in profiles:
 
 Where the function move() mimics the profile scraper notebook and saves images in a profile that meet the requirements and deletes the rest. Sporadic unavoidable errors and rate limits were met so this script was run on three separate notebooks (to maximize uptime) for ~5 days, yielding ~50k satisfactory images. 
 
-#### Tattoo design generation
+#### Model training
 
 First pass used the raw generated dataset with PyTorch's DCGAN implementation: [Repo](https://github.com/pytorch/examples/tree/master/dcgan). However, this is an older network architecture and provided less than adequate results. 
 
@@ -108,8 +109,19 @@ python run_training.py --num-gpus=1 --data-dir=./datasets --config=config-f --da
 The initial results provide a fairly scary scene as the residual learnings of the pretrained (face) model still appear. 
 
 <p align="center">
-  <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/fakes010016.jpg?raw=true" width="600" alt="fakes010016"/>
+  <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/fakes010016.jpg?raw=true" width="700" alt="fakes010016"/>
 </p>
+
+Thankfully the tormented faces fully dissapeared by the 60th iteration. The model was kept running on the VM for another 72 hours (411th iteration) until adequate results were produced. 
+
+<p align="center">
+  <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/fakes010409.jpg?raw=true" width="700" alt="fakes010409"/>
+</p>
+
+It can be seen that there are a few similarities in the generated images, which can be unfortunately attributed to partial modal collapse. This has to be expected with such a diverse imageset, thus I am happy with the results! 
+
+#### Model Testing
+
 
 ## Data
 
