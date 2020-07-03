@@ -72,11 +72,15 @@ for i in profiles:
     print('Total images: %f, profiles %f of %f' % (cnt, prof, len(profiles)))
 ```
 
-Where the function move() mimics the profile scraper notebook and saves images in a profile that meet the requirements and deletes the rest. Sporadic unavoidable errors and rate limits were met so this script was run on three separate notebook (to maximize uptime) for ~5 days, yielding ~50k satisfactory images. 
+Where the function move() mimics the profile scraper notebook and saves images in a profile that meet the requirements and deletes the rest. Sporadic unavoidable errors and rate limits were met so this script was run on three separate notebooks (to maximize uptime) for ~5 days, yielding ~50k satisfactory images. 
 
 #### Tattoo design generation
 
+First pass used the raw generated dataset with the 
 
+```.bash
+python dataset-tools.py --input_folder ~/stylegan2/raw_datasets/agg --output_folder ./output/agg/ --process_type square --border_type solid --border_color 255,255,255
+```
 
 ## Data
 
