@@ -82,7 +82,7 @@ First pass used the raw generated dataset with PyTorch's DCGAN implementation: [
   <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/dcgan.png?raw=true" width="400" alt="dcgan"/>
 </p>
 
-Consequently, the decision was made to adopt a state of the art network architecture, thus landing on Nvidia's StyleGAN2: [Repo](https://github.com/NVlabs/stylegan2). Whilst best in class, this unfortunately required compute that my humble Macbook Pro could not provide, so I had to rent a VM (500GB / P5000 GPU) from [Paperspace](https://www.paperspace.com/). The testing procedure applied is as follows;
+Consequently, the decision was made to adopt a state of the art network architecture, thus landing on Nvidia's StyleGAN2: [Repo](https://github.com/NVlabs/stylegan2). Whilst best in class, this unfortunately required compute that my humble Macbook Pro could not provide, so I had to rent a VM (500GB / P5000 GPU) from [Paperspace](https://www.paperspace.com/). The training procedure applied is as follows;
 
 The StyleGAN2 repo was first cloned and then the images were transferred from local to VM. This was done by; zipping the image folder, uploading to Google Drive, and a couple lines of terminal commands.
 
@@ -94,12 +94,22 @@ unzip 'zipped filename'
 Next the imageset's size had to be standardized to the standard for StyleGAN2 is square 1024x1024. Dvschultz provides a great tool to do so: [Repo](https://github.com/dvschultz/dataset-tools). Instead of forcing the distortion of the non-square images, a white horizontal or veritcal border was simply added. 
 
 ```.bash
-python dataset-tools.py --input_folder ~/stylegan2/raw_datasets/agg --output_folder ./output/agg/ --process_type square --border_type solid --border_color 255,255,255
+python dataset-tools.py --input_folder ~/stylegan2/raw_datasets/flashtattoo --output_folder ./output/datasets/ --process_type square --border_type solid --border_color 255,255,255
 ```
 
-Whilst user friendly a few images were not standradized correctly, and the [size.py](https://github.com/silkdom/Tattoo-GAN/blob/master/size.py) script had to be created. This eliminated the outliers, leaving the imageset ready for testing. 
+Whilst user friendly a few images were not standradized correctly, and the [size.py](https://github.com/silkdom/Tattoo-GAN/blob/master/size.py) script had to be created. This eliminated the outliers, leaving the imageset ready for training. 
 
+The VM was expensive so in order to expadite the training process, trasnfer learning was used to kickstart the process. One of Nvidia's ffhq pretrained models were initialized as the starting .pkl file. Training was then commenced with mirror augmentation but without metric collection.
 
+```.bash
+python run_training.py --num-gpus=1 --data-dir=./datasets --config=config-f --dataset=sq-512-domo --mirror-augment=true --metrics=None
+```
+
+The initial results provide a fairly scary scene as the residual learnings of the pretrained (face) model still appear. 
+
+<p align="center">
+  <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/fakes010016.jpg?raw=true" width="600" alt="fakes010016"/>
+</p>
 
 ## Data
 
