@@ -1,14 +1,11 @@
 # Tattoo-GAN
-
-TBC Soon! 6/22/2020
+## Overview
 
 <p align="center">
   <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/Tattoo-GAN.gif?raw=true" alt="Tattoo-GAN"/>
 </p>
 
 Using GANs to create tattoo ideas
-
-## Overview
 
 ## How it Works
 
@@ -122,9 +119,18 @@ It can be seen that there are a few similarities in the generated images, which 
 
 #### Model Testing
 
+The training process only produces 28 images per iteration (for progress tracking), and thus is not suitable for tattoo design generation. Instead a testing process using the now trained model can be performed. Thankfully the 'heavy-lifting' is not over and less compute is required. Infact for testing, Colab is more than adequate. Colab notebook soon to come. 
 
-## Data
+```.bash
+!python run_generator.py generate-images --network=/content/network-snapshot-010409.pkl --seeds=1-1000 --truncation-psi=1.0
+```
 
-## fix comments in Image scraping
+This command generates 1000 1024x1024 images, which can then be examined for tattoo inspiration. The following is my favourite;
+
+<p align="center">
+  <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/seed0179_2.png?raw=true" height="700" alt="Fav"/>
+</p>
+
+#### fix comments in Image scraping
 
 
