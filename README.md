@@ -79,8 +79,12 @@ Where the function move() mimics the profile scraper notebook and saves images i
 First pass used the raw generated dataset with PyTorch's DCGAN implementation: [Repo](https://github.com/pytorch/examples/tree/master/dcgan). However, this is an older network architecture and provided less than adequate results. 
 
 <p align="center">
-  <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/dcgan.png?raw=true" width="500" alt="dcgan"/>
+  <img src="https://github.com/silkdom/Tattoo-GAN/blob/master/img/dcgan.png?raw=true" width="400" alt="dcgan"/>
 </p>
+
+Consequently, the decision was made to adopt a state of the art network architecture, thus landing on Nvidia's StyleGAN2: [Repo](https://github.com/NVlabs/stylegan2). Whilst best in class, this unfortunately required compute that my humble Macbook Pro could not provide, so I had to rent a VM (500GB / P5000 GPU) from [Paperspace](https://www.paperspace.com/). The testing procedure applies is as follows;
+
+
 
 
 
