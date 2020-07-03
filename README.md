@@ -16,7 +16,7 @@ The workflow for the generation of tattoo design ideas can be broken into 3 sect
 
 - Profile scraping
 - Image scraping
-- Tattoo generation
+- Tattoo design generation
 
 #### Profile Scraping
 [Notebook](https://github.com/silkdom/Tattoo-GAN/blob/master/Profile_Scraper.ipynb)
@@ -56,10 +56,30 @@ Using this function the vast majority of real (on body) tattoos and irrelavent i
 #### Image Scraping
 [Notebook](https://github.com/silkdom/Tattoo-GAN/blob/master/Image_Scraper.ipynb)
 
+Now a list of potential tattoo artsists is generated, Instaloader can then be used to download the contents of each profile. 
+
+```python
+for i in profiles:
+    PROFILE = i
+    posts = instaloader.Profile.from_username(L.context, PROFILE).get_posts()
+    for post in posts:
+        try:
+            L.download_post(post, 'profiles_a')
+        except:
+            err += 1 # doing nothing on exception      
+    cnt += move()
+    prof += 1
+    print('Total images: %f, profiles %f of %f' % (cnt, prof, len(profiles)))
+```
+
+Where the function move() mimics the profile scraper notebook and saves images in a profile that meet the requirements and deletes the rest. Sporadic unavoidable errors and rate limits were met so this script was run on three separate notebook (to maximize uptime) for ~5 days, yielding ~50k satisfactory images. 
+
+#### Tattoo design generation
 
 
 
 ## Data
 
+## fix comments in Image scraping
 
 
